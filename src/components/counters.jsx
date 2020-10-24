@@ -10,16 +10,21 @@ class Counters extends Component {
             {id:5, value : -1,name:"nayan5"},
         ]
      };
+
+    handleDelete = (counterId) =>{
+        console.log("Event Handle ",counterId);
+    };
     render() { 
         return (<div>
             {
                 this.state.customcounter.map(counter => 
-                    <Counter key={counter.id} value={counter.value} selected={true} name={counter.name}>
-                        <h4>Counter #{counter.id}</h4>
-                        
+                    <Counter key={counter.id} value={counter.value} onDelete={this.handleDelete} selected={true} name={counter.name}>
+                        <h4>Counter #{counter.id}</h4>                        
                     </Counter>)}
         </div>)
-    }
+    };
+
+    
 }
  
 export default Counters;
