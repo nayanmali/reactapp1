@@ -1,53 +1,41 @@
 import React, { Component } from 'react';
 import { getMovies } from '../services/fakemovieservices';
+import Counters from './counters'
 
 class Movies extends Component {
     state = { 
         movies: getMovies()
      };
+     handleDelete= movie=>{
+      //  const movies = this.state.movies.filter(m=>m._id!==movie._id);
+        this.setState({movies:movie});
+     };
     render() { 
-        return <div>
+        return <div className="container">
+           <Counters/>
             <h2>Movie Data</h2>
-            <div class="table-responsive">
+            <div className="table-responsive">
             <table className="table table-bordered">
             <thead>
-                <tr>
-                    <td>Title</td>
-                    <td>US Gross</td>
-                    <td>Worldwide Gross</td>
-                    <td>US DVD Sales</td>
-                    <td>Production Budget</td>
-                    <td>Release Date</td>
-                    <td>MPAA Rating</td>
-                    <td>Running Time min</td>
-                    <td>Distributor</td>
-                    <td>Source</td>
-                    <td>Major Genre</td>
-                    <td>Creative Type</td>
-                    <td>Director</td>
-                    <td>Rotten Tomatoes Rating</td>
-                    <td>IMDB Rating</td>
-                    <td>IMDB Votes</td>
+                <tr >
+                    <th>Title</th>
+                    <th>US Gross</th>
+                    <th>Worldwide Gross</th>
+                    <th>US DVD Sales</th>
+                    <th>Production Budget</th>
+                    <th>Release Date</th>
+                    <th></th>
                 </tr>
             </thead>
             <tbody>
-                {this.state.movies.map(movies=> <tr>
-                <td>{movies.Title}</td>
-                    <td>{movies.["US Gross"]}</td>
-                    <td>{movies.["Worldwide Gross"]}</td>
-                    <td>{movies.["US DVD Sales"]}</td>
-                    <td>{movies.["Production Budget"]}</td>
-                    <td>{movies.["Release Date"]}</td>
-                    <td>{movies.["Running Time min"]}</td>
-                    <td>{movies.["MPAA Rating"]}</td>
-                    <td>{movies.Distributor}</td>
-                    <td>{movies.Source}</td>
-                    <td>{movies.["Major Genre"]}</td>
-                    <td>{movies.["Creative Type"]}</td>                    
-                    <td>{movies.Director}</td>
-                    <td>{movies.["Rotten Tomatoes Rating"]}</td>
-                    <td>{movies.["IMDB Rating"]}</td>
-                    <td>{movies.["IMDB Votes"]}</td>
+                {this.state.movies.map(movie=> <tr key={movie._id}>
+                <td>{movie.Title}</td>
+                    <td>{movie.["US Gross"]}</td>
+                    <td>{movie.["Worldwide Gross"]}</td>
+                    <td>{movie.["US DVD Sales"]}</td>
+                    <td>{movie.["Production Budget"]}</td>
+                    <td>{movie.["Release Date"]}</td>
+                   <td><button onClick={()=>{this.handleDelete(movie)}} className="btn btn-danger btn-sm">Delete</button></td>
                 </tr>)}
                 
             </tbody>
